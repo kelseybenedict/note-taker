@@ -1,29 +1,46 @@
-// requiring fs to handle CRUD operations
-const fs = require("fs");
-// using uuid to create a universal id (per instructions)
-const { v4: uuidv4 } = require('uuid');
+// using uuid to create a universal id (per instructions) - npmjs.org -> uuid
+const { v4: uuidv4} = require('uuid');
+uuidv4()
+// importing db.json file to reference it later
+const db = require("../db/db.json")
 
 // routing 
 module.exports = (app) => {
     // using a get request to route to the "notes" tab
     app.get('/api/notes', (req, res) => {
-        // creating a data variable to store our data string as a json file
-        let data = JSON.parse(fs.readFileSync("./data/db.json", "utf8"));
-        // setting our response into JSON
-        res.json(data);
+        // sending request to server
+        res.send(db);
     });
   
     app.post('/api/notes', (req, res) => {
         // creating a variable for body input from user
-        let newNote = req.body;
-        // generating ID for that new note
-        newNote.id = uuidv4();
-        // same as above in our get method
-        let data = JSON.parse(fs.readFileSync("./data/db.json", "utf8"));
-        // pushing our user input into our data
-        data.push(newNote);
-        // sending in our JSON as a string, so it can be processable by the web server
-        fs.writeFileSync('./data/db.json', JSON.stringify(dataStorage));
-        res.json(data);
-    })
-}
+        let note = {
+            id: uuidv4(),
+            title: req.body.title,
+            text: req.body.text
+
+        };
+        // adding note to db.json
+        db.push(note);
+        // sending note to server
+        res.send(note);
+    });
+    // adding delete method
+    // the route path lets you specify the specific note you want to delete
+    app.delete("/api/notes/:id", (req, res) => {
+        let noteID = req.params.id
+        // looping through db length 
+        for (var i = 0; i < db.length; i++) {
+            // if the ID in the json file matches the note ID in the path
+            if(db[i].id === noteID) {
+                // then create a variable of that index
+                let objIndex = db.indexOf(db);
+                // delete it from db
+                db.splice(objIndex,1);
+            }
+            // sending change to server
+        res.send(db);
+    }
+});
+};
+
