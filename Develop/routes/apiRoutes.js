@@ -1,3 +1,4 @@
+const fs = require("fs");
 // using uuid to create a universal id (per instructions) - npmjs.org -> uuid
 const { v4: uuidv4} = require('uuid');
 uuidv4()
