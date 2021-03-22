@@ -12,8 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // routing to apiRoutes & htmlRoutes
-require('./routes/apiRoutes')(app);
-require('./routes/htmlRoutes')(app);
+require('../Develop/routes/apiRoutes')(app);
+require('../Develop/routes/htmlRoutes')(app);
 
 // creating the listener and notification to check if it's working
 app.listen(PORT, () => {
