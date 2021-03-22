@@ -8,12 +8,12 @@ const db = require("../db/db.json")
 // routing 
 module.exports = (app) => {
     // using a get request to route to the "notes" tab
-    app.get('note-taker/Develop/public/api/notes', (req, res) => {
+    app.get('/api/notes', (req, res) => {
         // sending request to server
         res.send(db);
     });
   
-    app.post('note-taker/Develop/public/api/notes', (req, res) => {
+    app.post('/api/notes', (req, res) => {
         // creating a variable for body input from user
         let note = {
             id: uuidv4(),
@@ -28,7 +28,7 @@ module.exports = (app) => {
     });
     // adding delete method
     // the route path lets you specify the specific note you want to delete
-    app.delete("note-taker/Develop/public/api/notes/:id", (req, res) => {
+    app.delete("/api/notes/:id", (req, res) => {
         let noteID = req.params.id
         // looping through db length 
         for (var i = 0; i < db.length; i++) {
