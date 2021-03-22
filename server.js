@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 
 // setting initial port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // set up for data parsing -- express
 app.use(express.urlencoded({ extended: true }));
@@ -13,8 +13,8 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // routing to apiRoutes & htmlRoutes
-require('../Develop/routes/apiRoutes')(app);
-require('../Develop/routes/htmlRoutes')(app);
+require('./Develop/routes/apiRoutes')(app);
+require('./Develop/routes/htmlRoutes')(app);
 
 // creating the listener and notification to check if it's working
 app.listen(PORT, () => {
