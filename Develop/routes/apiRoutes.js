@@ -3,11 +3,7 @@ const fs = require("fs");
 // using uuid to create a universal id (per instructions)
 const { v4: uuidv4 } = require('uuid');
 
-// calling to generate UUID
-uuidv4();
-
 // routing 
-
 module.exports = (app) => {
     // using a get request to route to the "notes" tab
     app.get('/api/notes', (req, res) => {
